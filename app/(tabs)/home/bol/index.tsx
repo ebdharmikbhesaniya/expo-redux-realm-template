@@ -1,4 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
+import { router } from "expo-router";
 import React, { useState } from "react";
 import {
   Button,
@@ -6,11 +7,13 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  TouchableOpacity,
   View,
 } from "react-native";
 
 // Types for the data
 type BOLData = {
+  id: number;
   bol: string;
   source: string;
   palletCount: number;
@@ -35,19 +38,23 @@ const SearchBar: React.FC<{
 
 // BOL Card Component
 const BOLCard: React.FC<BOLData> = ({
+  id,
   bol,
   source,
   palletCount,
   expectedCount,
   cartonCount,
 }) => (
-  <View style={styles.bolCard}>
+  <TouchableOpacity
+    onPress={() => router.replace(`/home/bol/${id}`)}
+    style={styles.bolCard}
+  >
     <Text style={styles.bolText}>BOL: {bol}</Text>
     <Text style={styles.bolText}>Source: {source}</Text>
     <Text style={styles.bolText}>Pallet Count: {palletCount}</Text>
     <Text style={styles.bolText}>Expected Count: {expectedCount}</Text>
     <Text style={styles.bolText}>Carton Count: {cartonCount}</Text>
-  </View>
+  </TouchableOpacity>
 );
 
 // Main Page Component
@@ -56,6 +63,7 @@ const BolScreen: React.FC = () => {
 
   const bolData: BOLData[] = [
     {
+      id: 1,
       bol: "BRG2224077051",
       source: "WH",
       palletCount: 10,
@@ -63,6 +71,7 @@ const BolScreen: React.FC = () => {
       cartonCount: 0,
     },
     {
+      id: 2,
       bol: "BRG2224077053",
       source: "WH",
       palletCount: 10,
@@ -70,6 +79,7 @@ const BolScreen: React.FC = () => {
       cartonCount: 0,
     },
     {
+      id: 3,
       bol: "BRG2224077054",
       source: "WH",
       palletCount: 10,
