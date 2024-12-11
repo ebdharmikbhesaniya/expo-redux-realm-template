@@ -1,13 +1,16 @@
+import { RealmProvider } from "@/src/realm/db";
 import { store } from "@/src/store/store";
 import { Stack } from "expo-router";
-import { Provider } from "react-redux";
+import { Provider as ReduxProvider } from "react-redux";
 
 export default function RootLayout() {
   return (
-    <Provider store={store}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      </Stack>
-    </Provider>
+    <ReduxProvider store={store}>
+      <RealmProvider>
+        <Stack>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        </Stack>
+      </RealmProvider>
+    </ReduxProvider>
   );
 }
